@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,10 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void movieSearch(View view) {
         String movieSearch = etMovie.getText().toString();
-        MovieAsyncTask asyncTask = new MovieAsyncTask(this);
-        asyncTask.execute(movieSearch);
+        if (!movieSearch.isEmpty()) {
+            MovieAsyncTask asyncTask = new MovieAsyncTask(this);
+            asyncTask.execute(movieSearch);
 
-        etMovie.getText().clear();
+            etMovie.getText().clear();
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Enter something to search",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void movieStartIntent(ArrayList<String> movieData) {
